@@ -101,6 +101,10 @@ super + v
 super + b
     google-chrome-stable &
 
+# Open Pavucontrol
+super + p
+    pavucontrol &
+
 # --- Volume control ---
 # Increase volume
 XF86AudioRaiseVolume
