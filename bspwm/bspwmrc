@@ -53,7 +53,10 @@ bspc config external_rules_command $HOME/.config/bspwm/external-rules.sh
 
 # rules
 bspc rule -a Thunar state=floating center=on rectangle=1000x600+0+0
-bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a pavucontrol state=floating center=on rectangle=1000x600+0+0
+bspc rule -a Blueman-manager state=floating center=on rectangle=1000x600+0+0
+bspc rule -a GParted state=floating sticky=on center=on rectangle=1000x600+0+0
+bspc rule -a Alarm-clock-applet state=floating sticky=on center=on rectangle=500x500+0+0
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
@@ -76,5 +79,6 @@ picom &
 numlockx &
 dunst &
 greenclip daemon &
+alarm-clock-applet --gapplication-service &
 $HOME/.config/polybar/scripts/launcher.sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & #Starts the Polkit authentication agent for graphical permissions

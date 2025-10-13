@@ -89,9 +89,17 @@ super + c
 super + t
     thunar &
 
+# Open alarm-clock-applet 
+super + w
+    alarm-clock-applet &
+
 # Show clipboard history
 super + v
     rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+# Open Browser
+super + b
+    google-chrome-stable &
 
 # --- Volume control ---
 # Increase volume
