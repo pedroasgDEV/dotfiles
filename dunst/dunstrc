@@ -1,0 +1,74 @@
+# Dunst Configuration File - Gruvbox Theme
+# See dunst(5) for all options
+
+[global]
+    monitor = 0
+    follow = mouse 
+
+    origin = top-right
+
+    offset = (20, 50) 
+
+    font = JetBrainsMono Nerd Font 10 
+
+    markup = full
+
+    format = "<b>%s</b>\n%b"
+
+    alignment = left
+    vertical_alignment = center
+
+    padding = 10
+    horizontal_padding = 10
+
+    frame_width = 2
+    frame_color = "#fabd2f" # Gruvbox Yellow
+
+    separator_height = 0
+    separator_color = frame
+
+    gap_size = 10
+
+    corner_radius = 8
+
+    transparency = 10
+
+
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/
+
+
+    sort = yes
+    indicate_hidden = yes
+    idle_threshold = 120 
+    sticky_history = yes
+    history_length = 20
+    show_indicators = yes
+    ignore_newline = no
+
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
+
+[urgency_low]
+    # Low priority notifications (e.g., song changed)
+    background = "#32302f"   # Dark background
+    foreground = "#928374"   # Gray
+    frame_color = "#928374"  # Gray
+    timeout = 5
+
+[urgency_normal]
+    # Standard notifications (most of them)
+    background = "#32302f"   # Dark background
+    foreground = "#ebdbb2"   # Main text
+    frame_color = "#fabd2f"  # Yellow
+    timeout = 10
+
+[urgency_critical]
+    # Critical notifications (e.g., low battery)
+    background = "#fb4934"   # Red
+    foreground = "#fbf1c7"   # Light text
+    frame_color = "#fbf1c7"  # Light border
+    timeout = 0              # Stays on screen until dismissed
