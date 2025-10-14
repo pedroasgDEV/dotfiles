@@ -55,7 +55,7 @@ super + {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,10}'
 
 # Lock the screan
-super + shift + b
+super + l
     bash ~/.config/bspwm/scripts/lock.sh
 
 # Open Vscode
@@ -136,7 +136,7 @@ super + ctrl + Up
     monitor=`bspc query -M -m focused --names`; \
     xrandr --output $monitor --brightness 1 --gamma 1
 
-# Capture a selected area
+# Printscreen 
 super + Print
     flameshot gui &
 

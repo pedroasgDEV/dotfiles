@@ -44,6 +44,8 @@ Of course. Here is the complete list of installed programs from our conversation
     * `nerd-fonts-jetbrains-mono` (AUR): Main font, with embedded icons.
 
 ### Command-Line Utilities & Daemons
+* **zsh**: A powerful and interactive shell, used as the default.
+* **oh-my-zsh**: A framework for managing Zsh configuration, providing themes, plugins, and helpers.
 * **xdg-desktop-portal** & **xdg-desktop-portal-gtk**: So that Chrome and other apps can open the system's file picker.
 * **numlockx**: To automatically enable Num Lock.
 * **xss-lock**: The "bridge" that allows the system (systemd) to lock the screen when closing the notebook lid.
