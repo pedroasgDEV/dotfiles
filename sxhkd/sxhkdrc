@@ -82,6 +82,11 @@ super + b
 super + p
     pavucontrol &
 
+# Open network manager
+super + n
+    alacritty -e nmtui
+
+
 # Increase volume
 XF86AudioRaiseVolume
     pamixer -i 5
