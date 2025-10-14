@@ -23,7 +23,7 @@ if xrandr --query | grep -q "$HDMI connected"; then
 else
     xrandr --output "$EDP" --primary
     xrandr --output "$EDP" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-    bspc monitor "$EDP" -d α β γ δ ε ζ η θ ι κ λ
+    bspc monitor "$EDP" -d α β γ δ ε ζ η θ ι κ
 
 fi
 
@@ -43,7 +43,7 @@ xsetroot -cursor_name left_ptr &
 xsettingsd &
 
 # Set wallpaper
-feh --bg-scale $HOME/Pictures/wallpapers/lambda.png --image-bg "#23262d"
+feh --bg-scale $HOME/Pictures/wallpapers/medalha.png --image-bg "#23262d"
 
 # Focus on EDP monitor
 bspc monitor -f EDP
