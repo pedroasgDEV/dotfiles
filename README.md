@@ -122,7 +122,7 @@ This is a summary of the most important keybindings configured in `sxhkdrc`.
 | Go to / Move Window | `super + {_,shift + }{1-9,0}` | Jumps to or sends window to a specific workspace |
 | Cycle Workspaces (local) | `super + alt + {Left,Right}` | Cycles through workspaces on the current monitor |
 | **Application Launchers**| | |
-| Lock Screen | `super + shift + b` | Runs the `lock.sh` script |
+| Lock Screen | `super + l` | Runs the `lock.sh` script |
 | File Manager | `super + t` | Launches `thunar` |
 | Web Browser | `super + b` | Launches `google-chrome-stable` |
 | Audio Control | `super + p` | Launches `pavucontrol` |
