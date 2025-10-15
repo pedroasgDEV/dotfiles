@@ -42,19 +42,23 @@ super + shift + {l,s}
 super + {_,shift + }{Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east}
 
-# Next/Previous desktop
-super + alt + {Left,Right}
-	bspc desktop -f {prev,next}.local
+# Next/Previous workspace
+super + {_, shift + }Tab
+	bspc desktop -f {next, prev}
 
 # Next/Previous windows
-super + ctrl + {Left,Right}
+super + alt + {Left,Right}
     bspc node -f {prev,next}.!hidden.window
 
-# Focus/Send to the given desktop
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} '^{1-9,10}'
+# Focus to the given desktop
+super + {1-9,0}
+    bspc desktop -f '^'{1-9,10}
 
-# Lock the screan
+# Send to the given desktop
+super + shift + {1-9,0}
+    bspc node -d '^'{1-9,10} --follow
+
+# Lock the screen
 super + l
     bash ~/.config/bspwm/scripts/lock.sh
 
