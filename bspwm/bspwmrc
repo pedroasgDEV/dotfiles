@@ -55,6 +55,7 @@ bspc config external_rules_command $HOME/.config/bspwm/external-rules.sh
 bspc rule -a Thunar state=floating center=on rectangle=1000x600+0+0
 bspc rule -a pavucontrol state=floating center=on rectangle=1000x600+0+0
 bspc rule -a Blueman-manager state=floating center=on rectangle=1000x600+0+0
+bspc rule -a Evince state=floating center=on rectangle=1000x600+0+0
 bspc rule -a GParted state=floating sticky=on center=on rectangle=1000x600+0+0
 bspc rule -a Alarm-clock-applet state=floating sticky=on center=on rectangle=500x500+0+0
 bspc rule -a mplayer2 state=floating

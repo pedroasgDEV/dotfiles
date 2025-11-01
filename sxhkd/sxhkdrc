@@ -46,10 +46,6 @@ super + {_,shift + }{Left,Down,Up,Right}
 super + {_, shift + }Tab
 	bspc desktop -f {next, prev}
 
-# Next/Previous windows
-super + alt + {Left,Right}
-    bspc node -f {prev,next}.!hidden.window
-
 # Focus to the given desktop
 super + {1-9,0}
     bspc desktop -f '^'{1-9,10}
@@ -70,6 +66,10 @@ super + c
 super + t
     thunar &
 
+# Open Evince
+super + e
+    evince &
+
 # Open alarm-clock-applet 
 super + w
     alarm-clock-applet &
@@ -89,7 +89,6 @@ super + p
 # Open network manager
 super + n
     alacritty -e nmtui
-
 
 # Increase volume
 XF86AudioRaiseVolume
@@ -124,7 +123,7 @@ XF86MonBrightnessUp
     ~/.config/bspwm/scripts/change_brightness.sh up
 
 # Increase brightness
-super + alt + Up
+super + alt + Right
     ~/.config/bspwm/scripts/change_brightness.sh up
 
 # Decrease brightness
@@ -132,16 +131,16 @@ XF86MonBrightnessDown
     ~/.config/bspwm/scripts/change_brightness.sh down
 
 # Decrease brightness
-super + alt + Down
+super + alt + Left
     ~/.config/bspwm/scripts/change_brightness.sh down
 
 # Night mode
-super + ctrl + Down
+super + alt + Down
     monitor=`bspc query -M -m focused --names`; \
     xrandr --output $monitor --brightness .7 --gamma 1:0.93853986:0.88130458
 
 # Day mode
-super + ctrl + Up
+super + alt + Up
     monitor=`bspc query -M -m focused --names`; \
     xrandr --output $monitor --brightness 1 --gamma 1
 
