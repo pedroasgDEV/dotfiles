@@ -32,6 +32,7 @@ Of course. Here is the complete list of installed programs from our conversation
 * **dunst**: The daemon that displays notifications on the screen.
 * **rofi**: The application launcher and interactive menus.
 * **polybar**: Status bar.
+* **xsct**: The tool to control brightness and temperature of all monitors simultaneously.
 * **gradience**: The tool for applying themes to modern GTK4/libadwaita applications.
 * **Themes & Icons:**
     * `gruvbox-plus-gtk-theme-git` (AUR): MAin GTK theme.
@@ -95,7 +96,6 @@ This setup includes several custom scripts to enhance functionality:
 * **Smart Multi-Monitor Support:**
     * **`bspwmrc`:** A robust script ensures workspaces are always assigned to the correct monitors, regardless of detection order.
     * **`polybar/launch.sh`:** Automatically launches a bar on every connected monitor.
-    * **`change_brightness.sh`:** A script that changes brightness on all connected displays simultaneously.
 
 ---
 
@@ -130,7 +130,8 @@ This is a summary of the most important keybindings configured in `sxhkdrc`.
 | **System Control** | | |
 | Volume Control | `Volume Keys` | Controls system volume with `pamixer` |
 | Media Control | `Media Keys` | Controls media players with `playerctl` |
-| Brightness Control | `Brightness Keys` / `super + alt + Up/Down`| Controls brightness on all monitors |
+| Brightness Control | `Brightness Keys` / `super + alt + Left/Right`| Controls brightness on all monitors |
+| Temperature Control | `super + alt + Up/Down`| Controls temperature on all monitors |
 | Screenshot (Area) | `super + Print` | `flameshot gui` |
 
 ---

@@ -120,29 +120,27 @@ XF86AudioPrev
 
 # Increase brightness
 XF86MonBrightnessUp
-    ~/.config/bspwm/scripts/change_brightness.sh up
+    xsct -d 0 0.1
 
 # Increase brightness
 super + alt + Right
-    ~/.config/bspwm/scripts/change_brightness.sh up
+    xsct -d 0 0.1
 
 # Decrease brightness
 XF86MonBrightnessDown
-    ~/.config/bspwm/scripts/change_brightness.sh down
+    xsct -d 0 -0.1
 
 # Decrease brightness
 super + alt + Left
-    ~/.config/bspwm/scripts/change_brightness.sh down
+    xsct -d 0 -0.1
 
-# Night mode
-super + alt + Down
-    monitor=`bspc query -M -m focused --names`; \
-    xrandr --output $monitor --brightness .7 --gamma 1:0.93853986:0.88130458
-
-# Day mode
+# Day temperature
 super + alt + Up
-    monitor=`bspc query -M -m focused --names`; \
-    xrandr --output $monitor --brightness 1 --gamma 1
+    xsct 6500
+
+# Night temperature
+super + alt + Down
+    xsct 3500
 
 # Printscreen 
 super + Print
