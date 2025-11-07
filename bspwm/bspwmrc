@@ -58,6 +58,7 @@ bspc rule -a Blueman-manager state=floating center=on rectangle=1000x600+0+0
 bspc rule -a Evince state=floating center=on rectangle=1000x600+0+0
 bspc rule -a GParted state=floating sticky=on center=on rectangle=1000x600+0+0
 bspc rule -a Alarm-clock-applet state=floating sticky=on center=on rectangle=500x500+0+0
+bspc rule -a Gsimplecal state=floating center=on rectangle=500x200+0+0
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
