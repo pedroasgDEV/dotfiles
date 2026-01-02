@@ -4,6 +4,10 @@ local config = wezterm.config_builder()
 config.font = wezterm.font 'JetBrains Mono' 
 config.font_size = 12.0
 
+config.tab_bar_at_bottom = true     
+config.use_fancy_tab_bar = false  
+config.hide_tab_bar_if_only_one_tab = true
+
 config.colors = {
   foreground = '#ebdbb2',
   background = '#32302f',
@@ -30,10 +34,38 @@ config.colors = {
     '#8ec07c', -- Bright Cyan
     '#fbf1c7', -- Bright White
   },
+  tab_bar = {
+    background = '#32302f',
+
+    active_tab = {
+      bg_color = '#ebdbb2',
+      fg_color = '#32302f',
+      intensity = 'Bold',
+    },
+
+    inactive_tab = {
+      bg_color = '#3c3836',
+      fg_color = '#a89984', 
+    },
+
+    inactive_tab_hover = {
+      bg_color = '#504945',
+      fg_color = '#ebdbb2',
+    },
+
+    new_tab = {
+      bg_color = '#32302f',
+      fg_color = '#ebdbb2',
+    },
+    
+    new_tab_hover = {
+      bg_color = '#fabd2f',
+      fg_color = '#32302f',
+    },
+  },
 }
 
-config.window_decorations = "RESIZE" 
-config.enable_tab_bar = false     
+config.window_decorations = "RESIZE"
 config.window_padding = {
   left = 0,
   right = 0,

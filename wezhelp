@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# --- Gruvbox Colors ---
+BG_DARK="\033[48;5;235m"  # Dark background for header
+FG_LIGHT="\033[38;5;223m" # Light text
+ORANGE="\033[38;5;208m"   # Highlight
+YELLOW="\033[38;5;214m"   # Keys
+GREEN="\033[38;5;142m"    # Description
+GRAY="\033[38;5;245m"     # Separators
+BOLD="\033[1m"
+RESET="\033[0m"
+
+# Function to print formatted line
+print_line() {
+    # $1 = Modifier, $2 = Key, $3 = Description
+    printf "  ${ORANGE}%-10s ${GRAY}+ ${YELLOW}%-8s ${GRAY}→ ${GREEN}%s${RESET}\n" "$1" "$2" "$3"
+}
+
+print_header() {
+    echo -e "${BG_DARK}${ORANGE}${BOLD}  WEZTERM CHEATSHEET  ${RESET}"
+    echo ""
+}
+
+clear
+print_header
+
+echo -e "${FG_LIGHT}${BOLD}:: TABS${RESET}"
+print_line "Ctrl+Shift" "T" "New Tab"
+print_line "Ctrl+Shift" "W" "Close Tab"
+print_line "Ctrl" "Tab" "Next Tab"
+print_line "Ctrl+Shift" "Tab" "Previous Tab"
+echo ""
+
+echo -e "${FG_LIGHT}${BOLD}:: MISC / UTILS${RESET}"
+print_line "Ctrl+Shift" "C/V" "Copy / Paste"
+print_line "Ctrl+Shift" "X" "Copy Mode (Vim Style)"
+print_line "Ctrl+Shift" "F" "Search Text"
+print_line "Ctrl+Shift" "+" "Increase Font Size"
+print_line "Ctrl" "-" "Decrease Font Size"
+print_line "Ctrl" "0" "Reset Font Size"
+echo ""
