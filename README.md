@@ -22,11 +22,13 @@ Of course. Here is the complete list of installed programs from our conversation
 ---
 
 ### System & Window Management
+
 * **bspwm**: Main window manager.
 * **sxhkd**: The daemon that manages all keyboard shortcuts.
 * **polkit-gnome**: The authentication agent that prompts passwords for graphical applications requiring admin privileges (like `gparted`).
 
 ### Appearance & Theming
+
 * **picom**: The compositor responsible for visual effects like transparency and rounded corners.
 * **lxappearance**: Graphical tool to configure GTK themes, icons, and fonts.
 * **dunst**: The daemon that displays notifications on the screen.
@@ -35,16 +37,19 @@ Of course. Here is the complete list of installed programs from our conversation
 * **xsct**: The tool to control brightness and temperature of all monitors simultaneously.
 * **gradience**: The tool for applying themes to modern GTK4/libadwaita applications.
 * **Themes & Icons:**
-    * `gruvbox-plus-gtk-theme-git` (AUR): MAin GTK theme.
-    * `gruvbox-plus-icons-git` (AUR): Icons for the Gruvbox theme.
-    * `papirus-icon-theme`: A complete icon set to ensure all applications have an icon.
-    * `elementary-icon-theme` & `gtk-theme-elementary`: Theme and icon set from elementary OS.
-    * `flat-remix-cursors` (AUR) & `bibata-cursor-theme` (AUR): Mouse cursor themes.
+
+  * `gruvbox-plus-gtk-theme-git` (AUR): Main GTK theme.
+  * `gruvbox-plus-icons-git` (AUR): Icons for the Gruvbox theme.
+  * `papirus-icon-theme`: A complete icon set to ensure all applications have an icon.
+  * `elementary-icon-theme` & `gtk-theme-elementary`: Theme and icon set from elementary OS.
+  * `flat-remix-cursors` (AUR) & `bibata-cursor-theme` (AUR): Mouse cursor themes.
 * **Fonts:**
-    * `ttf-jetbrains-mono`, `ttf-fira-code`, `noto-fonts`: Common text fonts.
-    * `nerd-fonts-jetbrains-mono` (AUR): Main font, with embedded icons.
+
+  * `ttf-jetbrains-mono`, `ttf-fira-code`, `noto-fonts`: Common text fonts.
+  * `nerd-fonts-jetbrains-mono` (AUR): Main font, with embedded icons.
 
 ### Command-Line Utilities & Daemons
+
 * **zsh**: A powerful and interactive shell, used as the default.
 * **oh-my-zsh**: A framework for managing Zsh configuration, providing themes, plugins, and helpers.
 * **xdg-desktop-portal** & **xdg-desktop-portal-gtk**: So that Chrome and other apps can open the system's file picker.
@@ -55,31 +60,48 @@ Of course. Here is the complete list of installed programs from our conversation
 * **libnotify**: Provides the `notify-send` command to create notifications.
 * **bc**: A command-line calculator, used in brightness script.
 * **Audio Tools:**
-    * `pamixer`: To control volume via the command line (used in keybindings).
-    * `pulsemixer` (AUR): The text-based interface (TUI) for managing audio.
+
+  * `pamixer`: To control volume via the command line (used in keybindings).
+  * `pulsemixer` (AUR): The text-based interface (TUI) for managing audio.
 * **Hardware Tools:**
-    * `brightnessctl`: To control the notebook's screen brightness.
-    * `ddcutil`: To control the brightness of external monitors (alternative).
-    * `playerctl`: To control media players with multimedia keys.
+
+  * `brightnessctl`: To control the notebook's screen brightness.
+  * `ddcutil`: To control the brightness of external monitors (alternative).
+  * `playerctl`: To control media players with multimedia keys.
 * **Screenshot Tools:**
-    * `flameshot`: The more powerful graphical alternative.
+
+  * `flameshot`: The more powerful graphical alternative.
 
 ### Graphical Applications (GUI)
+
 * **alacritty**: Main GPU-accelerated terminal emulator.
 * **pavucontrol**: The graphical control panel to manage all audio inputs and outputs.
 * **gparted**: The partition editor.
 * **xfce4-settings**: Used to get tools like `xfsettingsd` (to apply themes) and `xfce4-preferred-applications`.
 * **gsimplecal**: The popup calendar for Polybar.
 * **Timers & Alarms:**
-    * `alarm-clock-applet` (AUR): The clock, timer, and alarm application from GTK.
+
+  * `alarm-clock-applet` (AUR): The clock, timer, and alarm application from GTK.
 * **Other:**
-    * `mpv`: Lightweight media player, used as the default audio player.
-    * `google-chrome-stable`: Main browser.
+
+  * `mpv`: Lightweight media player, used as the default audio player.
+  * `google-chrome-stable`: Main browser.
 
 ### Development & Compilation Tools
+
 * **git** & **base-devel**: Dependencies required to compile and install AUR packages, like `yay`.
 * **yay** (AUR): A "helper" for installing and managing AUR packages.
 * **gst-plugins-good**, **gst-plugins-bad**, **gst-plugins-ugly**: Media codecs for GStreamer.
+
+---
+
+## Development Environment (Neovim as IDE)
+
+This setup uses **Neovim (`nvim`) as the primary IDE**, fully integrated into the keyboard-driven workflow and visually consistent with the rest of the system.
+
+* **Editor:** **Neovim** — fast, modal, and highly extensible.
+* **Theme:** **Gruvbox** — matching the desktop theme for a cohesive visual experience (dark, soft variant).
+* **Font:** **JetBrains Mono Nerd Font** — consistent with the terminal and UI, enabling icon support in plugins.
 
 ---
 
@@ -89,49 +111,49 @@ This setup includes several custom scripts to enhance functionality:
 
 * **Dynamic `sxhkd` Help Menu (`Super + h`):** A Rofi window that automatically parses `sxhkdrc` to display a searchable list of all keybindings.
 * **Interactive Polybar Modules:**
-    * **Audio:** Shows output/input volume. Right and left click to mute. Midle-click to open `pavucontrol`.
-    * **Network:** Shows connection status and IP. Right-click to open `nmtui`. left-click to toggle networking on/off.
-    * **Bluetooth:** Shows status and connected device count. Left-lick to toggle. Right-click to open `blueman-manager`.
-    * **Date:** Right-click to show a `gsimplecal` popup. Left-click to open `larm-clock-applet` .
+
+  * **Audio:** Shows output/input volume. Right and left click to mute. Midle-click to open `pavucontrol`.
+  * **Network:** Shows connection status and IP. Right-click to open `nmtui`. left-click to toggle networking on/off.
+  * **Bluetooth:** Shows status and connected device count. Left-lick to toggle. Right-click to open `blueman-manager`.
+  * **Date:** Right-click to show a `gsimplecal` popup. Left-click to open `alarm-clock-applet`.
 * **Smart Multi-Monitor Support:**
-    * **`bspwmrc`:** A robust script ensures workspaces are always assigned to the correct monitors, regardless of detection order.
-    * **`polybar/launch.sh`:** Automatically launches a bar on every connected monitor.
+
+  * **`bspwmrc`:** A robust script ensures workspaces are always assigned to the correct monitors, regardless of detection order.
+  * **`polybar/launch.sh`:** Automatically launches a bar on every connected monitor.
 
 ---
 
-## ⌨Keybindings Overview
+## ⌨ Keybindings Overview
 
 This is a summary of the most important keybindings configured in `sxhkdrc`.
 
-| Category | Shortcut | Action |
-| :--- | :--- | :--- |
-| **Basic Management** | | |
-| Open Terminal | `super + Return` | Launches `alacritty` |
-| Application Launcher | `super + @space` | Launches `rofi -show drun` |
-| Reload Keybindings | `super + Escape` | Reloads `sxhkd` configuration |
-| Quit/Restart bspwm | `super + alt + {q,r}` | Quits or restarts the window manager |
-| **Window Management** | | |
-| Close/Kill Window | `super + {_,shift + }q` | Closes or kills the focused window |
-| Toggle Fullscreen | `super + f` | Toggles fullscreen state |
-| Toggle Floating | `super + s` | Toggles floating state |
-| **Window Navigation** | | |
-| Focus/Swap Window | `super + {_,shift + }Arrows` | Focuses or swaps the window in the given direction |
-| Cycle Windows (local) | `super + ctrl + {Left,Right}` | Cycles through windows of all workspaces |
-| Show All Windows (global) | `super + a` | Launches `rofi -show window` |
-| **Workspace Navigation** | | |
-| Go to / Move Window | `super + {_,shift + }{1-9,0}` | Jumps to or sends window to a specific workspace |
-| Cycle Workspaces (local) | `super + alt + {Left,Right}` | Cycles through workspaces on the current monitor |
-| **Application Launchers**| | |
-| Lock Screen | `super + l` | Runs the `lock.sh` script |
-| File Manager | `super + t` | Launches `thunar` |
-| Web Browser | `super + b` | Launches `google-chrome-stable` |
-| Audio Control | `super + p` | Launches `pavucontrol` |
-| Clipboard History | `super + v` | Launches Rofi clipboard manager |
-| **System Control** | | |
-| Volume Control | `Volume Keys` | Controls system volume with `pamixer` |
-| Media Control | `Media Keys` | Controls media players with `playerctl` |
-| Brightness Control | `Brightness Keys` / `super + alt + Left/Right`| Controls brightness on all monitors |
-| Temperature Control | `super + alt + Up/Down`| Controls temperature on all monitors |
-| Screenshot (Area) | `super + Print` | `flameshot gui` |
-
----
+| Category                  | Shortcut                                       | Action                                             |
+| :------------------------ | :--------------------------------------------- | :------------------------------------------------- |
+| **Basic Management**      |                                                |                                                    |
+| Open Terminal             | `super + Return`                               | Launches `alacritty`                               |
+| Application Launcher      | `super + @space`                               | Launches `rofi -show drun`                         |
+| Reload Keybindings        | `super + Escape`                               | Reloads `sxhkd` configuration                      |
+| Quit/Restart bspwm        | `super + alt + {q,r}`                          | Quits or restarts the window manager               |
+| **Window Management**     |                                                |                                                    |
+| Close/Kill Window         | `super + {_,shift + }q`                        | Closes or kills the focused window                 |
+| Toggle Fullscreen         | `super + f`                                    | Toggles fullscreen state                           |
+| Toggle Floating           | `super + s`                                    | Toggles floating state                             |
+| **Window Navigation**     |                                                |                                                    |
+| Focus/Swap Window         | `super + {_,shift + }Arrows`                   | Focuses or swaps the window in the given direction |
+| Cycle Windows (local)     | `super + ctrl + {Left,Right}`                  | Cycles through windows of all workspaces           |
+| Show All Windows (global) | `super + a`                                    | Launches `rofi -show window`                       |
+| **Workspace Navigation**  |                                                |                                                    |
+| Go to / Move Window       | `super + {_,shift + }{1-9,0}`                  | Jumps to or sends window to a specific workspace   |
+| Cycle Workspaces (local)  | `super + alt + {Left,Right}`                   | Cycles through workspaces on the current monitor   |
+| **Application Launchers** |                                                |                                                    |
+| Lock Screen               | `super + l`                                    | Runs the `lock.sh` script                          |
+| File Manager              | `super + t`                                    | Launches `thunar`                                  |
+| Web Browser               | `super + b`                                    | Launches `google-chrome-stable`                    |
+| Audio Control             | `super + p`                                    | Launches `pavucontrol`                             |
+| Clipboard History         | `super + v`                                    | Launches Rofi clipboard manager                    |
+| **System Control**        |                                                |                                                    |
+| Volume Control            | `Volume Keys`                                  | Controls system volume with `pamixer`              |
+| Media Control             | `Media Keys`                                   | Controls media players with `playerctl`            |
+| Brightness Control        | `Brightness Keys` / `super + alt + Left/Right` | Controls brightness on all monitors                |
+| Temperature Control       | `super + alt + Up/Down`                        | Controls temperature on all monitors               |
+| Screenshot (Area)         | `super + Print`                                | `flameshot gui`                                    |

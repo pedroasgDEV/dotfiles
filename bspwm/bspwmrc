@@ -4,27 +4,29 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
+# Monitor sconfiguration & Layout
+
 EDP="eDP1"
-HDMI="HDMI1"
 
 BRIGHTNESS="1.0"
 GAMMA="1.0"
 
-if xrandr --query | grep -q "$HDMI connected"; then
+EXTERNAL=$(xrandr --query | awk '/ connected/ {print $1}' | grep -v "^$EDP$")
+
+if [ -n "$EXTERNAL" ]; then
     xrandr --output "$EDP" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-    xrandr --output "$HDMI" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
+    xrandr --output "$EXTERNAL" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
 
     bspc monitor "$EDP" -d α β γ δ ε
-    bspc monitor "$HDMI" -d Α Β Γ Δ Ε
+    bspc monitor "$EXTERNAL" -d Α Β Γ Δ Ε
 
     xrandr --output "$EDP" --primary \
-           --output "$HDMI" --above "$EDP"
-
+           --output "$EXTERNAL" --above "$EDP"
 else
     xrandr --output "$EDP" --primary
     xrandr --output "$EDP" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-    bspc monitor "$EDP" -d α β γ δ ε ζ η θ ι κ
 
+    bspc monitor "$EDP" -d α β γ δ ε ζ η θ ι κ
 fi
 
 # Windows configuration & Layout
@@ -55,7 +57,6 @@ bspc config external_rules_command $HOME/.config/bspwm/external-rules.sh
 bspc rule -a Thunar state=floating center=on rectangle=1000x600+0+0
 bspc rule -a pavucontrol state=floating center=on rectangle=1000x600+0+0
 bspc rule -a Blueman-manager state=floating center=on rectangle=1000x600+0+0
-bspc rule -a Evince state=floating center=on rectangle=1000x600+0+0
 bspc rule -a GParted state=floating sticky=on center=on rectangle=1000x600+0+0
 bspc rule -a Alarm-clock-applet state=floating sticky=on center=on rectangle=500x500+0+0
 bspc rule -a Gsimplecal state=floating center=on rectangle=500x200+0+0
