@@ -20,7 +20,7 @@
 }
 
 window {
-    height: 50%;
+    height: 75%;
     width: 55%;
 
     border: 1;

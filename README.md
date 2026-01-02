@@ -74,7 +74,7 @@ Of course. Here is the complete list of installed programs from our conversation
 
 ### Graphical Applications (GUI)
 
-* **alacritty**: Main GPU-accelerated terminal emulator.
+* **wezterm**: Main GPU-accelerated terminal emulator.
 * **pavucontrol**: The graphical control panel to manage all audio inputs and outputs.
 * **gparted**: The partition editor.
 * **xfce4-settings**: Used to get tools like `xfsettingsd` (to apply themes) and `xfce4-preferred-applications`.

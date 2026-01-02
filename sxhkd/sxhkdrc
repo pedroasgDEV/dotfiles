@@ -1,6 +1,6 @@
 # Terminal emulator
 super + Return
-	alacritty
+	wezterm
 
 # Program launcher
 super + @space
