@@ -58,9 +58,9 @@ super + shift + {1-9,0}
 super + l
     bash ~/.config/bspwm/scripts/lock.sh
 
-# Open Vscode
+# Open Neovim inside WezTerm
 super + c
-    code &
+    wezterm start -- nvim
 
 # Open Thunar
 super + t
@@ -88,7 +88,7 @@ super + p
 
 # Open network manager
 super + n
-    alacritty -e nmtui
+    wezterm -e nmtui
 
 # Increase volume
 XF86AudioRaiseVolume
