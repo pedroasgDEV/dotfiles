@@ -105,4 +105,3 @@ map('n', '<leader>lv', '<cmd>VimtexView<cr>',    { desc = 'View PDF (Zathura)' }
 map('n', '<leader>le', '<cmd>VimtexErrors<cr>',  { desc = 'Show Errors' })
 map('n', '<leader>lc', '<cmd>VimtexClean<cr>',   { desc = 'Clean Auxiliary Files' })
 map('n', '<leader>ls', '<cmd>VimtexStop<cr>',    { desc = 'Stop Compilation' })
-map('n', '<leader>la', '<cmd>set spell!<cr>', { desc = 'Toggle Spell Check' })

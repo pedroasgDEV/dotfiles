@@ -6,82 +6,134 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
+    -- Plugin that shows errors inline (configured to be non-intrusive)
+    { 
+      "chikko80/error-lens.nvim", 
+      opts = {
+        error_stack_trace = false, -- PREVENTS the giant red block on the screen
+        delay = 500, -- Delay to avoid flickering while typing fast
+      } 
+    },
+    -- Dependency needed for the keymaps defined below
+    'ibhagwan/fzf-lua', 
   },
   config = function()
-    -- GLOBAL DIAGNOSTIC CONFIGURATION
+    -- ==========================================================
+    -- 1. FUNCTION: TOGGLE LANGUAGE (PT-BR / EN-US)
+    -- ==========================================================
+    local function toggle_latex_langs()
+      -- Neovim 0.11+ uses get_clients, fallback for 0.10
+      local get_clients = vim.lsp.get_clients or vim.lsp.get_active_clients
+      
+      -- UPDATED: Now looking for 'ltex_plus' instead of 'ltex'
+      local clients = get_clients({ bufnr = 0, name = "ltex_plus" })
+      local client = clients[1]
+
+      if not client then
+        vim.notify("LTeX LSP is not active yet. Wait a moment...", vim.log.levels.WARN)
+        return
+      end
+
+      local current = client.config.settings.ltex.language
+      local next_lang, label, spell
+
+      -- Logic: PT -> Mixed -> EN -> PT
+      if current == "pt-BR" then
+        next_lang, label, spell = { "en-US", "pt-BR" }, "Mixed (EN/PT)", "en_us,pt_br"
+      elseif type(current) == "table" then -- If it is currently mixed
+        next_lang, label, spell = "en-US", "English (US)", "en_us"
+      else
+        next_lang, label, spell = "pt-BR", "Portuguese (BR)", "pt_br"
+      end
+
+      -- Update Settings
+      client.config.settings.ltex.language = next_lang
+      vim.opt_local.spelllang = spell
+      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+      vim.notify("Language switched to: " .. label)
+    end
+
+    -- ==========================================================
+    -- 2. DIAGNOSTICS CONFIG (Icons & Text)
+    -- ==========================================================
     vim.diagnostic.config({
-      update_in_insert = true, 
-      virtual_text = {
-        severity = { min = vim.diagnostic.severity.WARN },
-      },
-      signs = {
-        severity = { min = vim.diagnostic.severity.WARN },
-      },
-      underline = {
-        severity = { min = vim.diagnostic.severity.WARN },
-      },
+      update_in_insert = false, -- Stops scanning while typing (Prevents crashes/lag)
+      virtual_text = { spacing = 4, prefix = "●" },
+      severity_sort = true,
     })
 
-    -- Create an autocmd that runs when an LSP attaches to a buffer
+    -- ==========================================================
+    -- 3. LSP ATTACH (Keymaps)
+    -- ==========================================================
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc, mode)
-          mode = mode or 'n'
-          vim.keymap.set(mode, '<leader>c' .. keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        local map = function(keys, func, desc)
+          vim.keymap.set('n', '<leader>c' .. keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- Keymaps using Fzf-lua for a VS Code-like experience
-        map('d', require('fzf-lua').lsp_definitions, 'Definition')
-        map('r', require('fzf-lua').lsp_references, 'References')
-        map('i', require('fzf-lua').lsp_implementations, 'Implementation')
-        map('t', require('fzf-lua').lsp_typedefs, 'Type Definition')
-        map('s', require('fzf-lua').lsp_document_symbols, 'Document Symbols')
-        map('w', require('fzf-lua').lsp_live_workspace_symbols, 'Workspace Symbols')
+        -- LaTeX Specific: Cycle Language
+        if vim.bo[event.buf].filetype == 'tex' then
+          vim.keymap.set('n', '<leader>li', toggle_latex_langs, { buffer = event.buf, desc = 'LaTeX: Cycle Language' })
+        end
+
+        -- Fzf-lua mappings
+        local fzf = require('fzf-lua')
+        map('d', fzf.lsp_definitions, 'Definition')
+        map('r', fzf.lsp_references, 'References')
+        map('i', fzf.lsp_implementations, 'Implementation')
+        map('a', vim.lsp.buf.code_action, 'Code Action')
+        map('e', fzf.lsp_document_diagnostics, 'Document Diagnostics')
+        
+        -- Rename
         map('n', vim.lsp.buf.rename, 'Rename')
-        map('a', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
-        map('e', require('fzf-lua').lsp_document_diagnostics, 'Document Diagnostics')
-
-
-        -- Buffer management and Code Actions
-        vim.keymap.set('n', 'gd', require('fzf-lua').lsp_definitions, { buffer = event.buf, desc = 'LSP: Goto Definition' })
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = event.buf, desc = 'LSP: Goto Declaration' })      end,
+      end,
     })
 
-    -- Server Capabilities
+    -- ==========================================================
+    -- 4. SERVER SETUP (Mason)
+    -- ==========================================================
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    -- Define Servers to be installed by Mason
+    
+    -- Server Configurations
     local servers = {
-      clangd = {},    -- C/C++
-      pyright = {},   -- Python
-      texlab = {},    -- LaTeX
-      marksman = {},  -- Markdown
-      bashls = {},    -- Bash
-      lua_ls = {      -- Lua for Neovim config
-        settings = { Lua = { diagnostics = { globals = { 'vim' } } } }
+      clangd = {},
+      pyright = {},
+      texlab = {},   -- Builds the PDF / Basic completion
+      bashls = {},
+      -- Lua configuration
+      lua_ls = { 
+        settings = { 
+          Lua = { 
+            diagnostics = { globals = { 'vim' } } 
+          } 
+        } 
       },
-      ltex = {        -- Grammar and Spell check (PT/EN)
-        settings = { ltex = { language = "pt-BR" } }
+      -- LTeX configuration (Using ltex_plus)
+      ltex_plus = {
+        filetypes = { "latex", "tex", "bib", "markdown" },
+        settings = { 
+          ltex = { 
+            language = "pt-BR",
+            checkFrequency = "save",
+            sentenceCacheSize = 2000,
+          } 
+        }
       },
     }
 
-    -- Install servers via Mason Tool Installer
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, { 'stylua' })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-    -- Setup Mason LSP Config with Handlers
+    require('mason-tool-installer').setup { ensure_installed = vim.tbl_keys(servers) }
+    
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
-          -- They are handled by specialized plugins below
-          if server_name == "rust_analyzer" or server_name == "hls" then
-            return
-          end
-
+          -- Skip rust manually (assuming you use rustaceanvim)
+          if server_name == "rust_analyzer" then return end 
+          
           local server = servers[server_name] or {}
+          -- Merges default capabilities with server-specific ones
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          
           require('lspconfig')[server_name].setup(server)
         end,
       },
