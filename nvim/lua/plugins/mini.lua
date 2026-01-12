@@ -55,7 +55,9 @@ return {
         -- ==========================================================
         -- STARTER
         -- ==========================================================
-        require("mini.sessions").setup()
+        require("mini.sessions").setup({
+            autowrite = true,
+        })
         require("mini.visits").setup()
 
         local starter = require("mini.starter")

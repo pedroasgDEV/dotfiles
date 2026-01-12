@@ -80,6 +80,7 @@ map("n", "<leader>w", "<c-w>", { desc = "Window Actions" })
 
 map("n", "<Tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next Buffer" })
 map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Last Buffer" })
+map("n", "<M-Tab>", "<cmd>bdelete<cr>", { desc = "Close current buffer" })
 
 -- =============================================================================
 -- Sessions 
@@ -95,6 +96,9 @@ map('n', '<leader>sl', function() require('mini.sessions').select() end, { desc 
 
 -- Open Starter (Home screen)
 map('n', '<leader>sh', function() require('mini.starter').open() end, { desc = 'Home screen' })
+
+-- Delete a session
+map('n', '<leader>sd', function() require('mini.sessions').select('delete') end, { desc = 'Delete session' })
 
 -- =============================================================================
 -- LATEX

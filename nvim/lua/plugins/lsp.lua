@@ -72,8 +72,8 @@ return {
           vim.keymap.set('n', '<leader>c' .. keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
-        -- LaTeX Specific: Cycle Language
-        if vim.bo[event.buf].filetype == 'tex' then
+        local ft = vim.bo[event.buf].filetype
+        if ft == 'tex' or ft == 'latex' or ft == 'bib' or ft == 'markdown' then
           vim.keymap.set('n', '<leader>li', toggle_latex_langs, { buffer = event.buf, desc = 'LaTeX: Cycle Language' })
         end
 
