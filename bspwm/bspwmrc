@@ -5,29 +5,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Monitor sconfiguration & Layout
-
-EDP="eDP1"
-
-BRIGHTNESS="1.0"
-GAMMA="1.0"
-
-EXTERNAL=$(xrandr --query | awk '/ connected/ {print $1}' | grep -v "^$EDP$")
-
-if [ -n "$EXTERNAL" ]; then
-    xrandr --output "$EDP" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-    xrandr --output "$EXTERNAL" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-
-    bspc monitor "$EDP" -d α β γ δ ε
-    bspc monitor "$EXTERNAL" -d Α Β Γ Δ Ε
-
-    xrandr --output "$EDP" --primary \
-           --output "$EXTERNAL" --above "$EDP"
-else
-    xrandr --output "$EDP" --primary
-    xrandr --output "$EDP" --brightness "$BRIGHTNESS" --gamma "$GAMMA"
-
-    bspc monitor "$EDP" -d α β γ δ ε ζ η θ ι κ
-fi
+$HOME/.config/bspwm/scripts/monitor_setup.sh &
 
 # Windows configuration & Layout
 
@@ -44,11 +22,7 @@ bspc config presel_feedback_color "#C3AB93"
 xsetroot -cursor_name left_ptr &
 xsettingsd &
 
-# Set wallpaper
-feh --bg-scale $HOME/Pictures/wallpapers/medalha.png --image-bg "#23262d"
-
-# Focus on EDP monitor
-bspc monitor -f EDP
+bspc monitor -f $(bspc query -M | head -n1)
 
 # external rules
 bspc config external_rules_command $HOME/.config/bspwm/external-rules.sh
@@ -83,5 +57,4 @@ numlockx &
 dunst &
 greenclip daemon &
 alarm-clock-applet --gapplication-service &
-$HOME/.config/polybar/scripts/launcher.sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & #Starts the Polkit authentication agent for graphical permissions
