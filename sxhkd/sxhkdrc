@@ -22,10 +22,6 @@ super + alt + {q,r}
 super + {_,shift + }q
 	bspc node -{c,k}
 
-# Alternate tiled and monocle
-super + m
-	bspc desktop -l next
-
 # Set the window fullscreen
 super + f
     bspc query -T -n | grep -q '"state":"fullscreen"' && bspc node -t tiled || bspc node -t fullscreen
@@ -83,7 +79,7 @@ super + b
     google-chrome-stable &
 
 # Open Pavucontrol
-super + p
+super + m
     pavucontrol &
 
 # Open network manager
