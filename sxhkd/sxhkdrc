@@ -150,6 +150,10 @@ super + alt + m
 super + ctrl + m
     ~/.config/bspwm/scripts/mirror_monitor_setup.sh
 
+# Pomodoro
+super + p
+    solanum & 
+
 # Help
 super + h
     ~/.config/rofi/scripts/sxhkd_helper.sh | rofi -dmenu -i -p "Keybindings" -l 1g0 -markup-rows -sep '\0'

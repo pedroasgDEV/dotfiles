@@ -37,6 +37,7 @@ bspc rule -a Gsimplecal state=floating center=on rectangle=500x200+0+0
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a solanum state=floating sticky=on border=off rectangle=300x200+0+0 center=on
 
 # Disable screensaver
 # xset s off

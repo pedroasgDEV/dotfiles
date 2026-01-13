@@ -79,6 +79,7 @@ Of course. Here is the complete list of installed programs from our conversation
 * **gparted**: The partition editor.
 * **xfce4-settings**: Used to get tools like `xfsettingsd` (to apply themes) and `xfce4-preferred-applications`.
 * **gsimplecal**: The popup calendar for Polybar.
+* **Solanum**: Pomodoro app 
 * **Timers & Alarms:**
 
   * `alarm-clock-applet` (AUR): The clock, timer, and alarm application from GTK.
