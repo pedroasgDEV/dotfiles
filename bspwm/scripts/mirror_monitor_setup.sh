@@ -17,16 +17,15 @@ if [ -n "$EXTERNAL" ]; then
     else
         COMMON_RES="$RES_INT"
     fi
-
-    # 4. Aplica a resolução escolhida em AMBOS (removemos o --auto e usamos --mode)
-    xrandr --output "$EXTERNAL" --mode "$COMMON_RES" --primary \
-           --output "$INTERNAL" --mode "$COMMON_RES" --same-as "$EXTERNAL"
+    
+    xrandr --output "$INTERNAL" --primary --auto --scale-from "$COMMON_RES" --panning 0x0 --pos 0x0 \
+           --output "$EXTERNAL" --auto --scale-from "$COMMON_RES" --panning 0x0 --pos 0x0 --same-as "$INTERNAL"
 
     bspc monitor "$INTERNAL" -d α β γ δ ε ζ η θ ι κ
     bspc query -M | grep -v "$(bspc query -M -m $INTERNAL)" | xargs -I {} bspc monitor {} --remove
 
 else
-    xrandr --output "$INTERNAL" --primary --auto
+    xrandr --output "$INTERNAL" --primary --auto --scale 1x1 --panning 0x0
 
     for monitor in $(xrandr --query | grep " disconnected" | awk '{print $1}'); do
         xrandr --output "$monitor" --off
@@ -36,7 +35,7 @@ else
     bspc query -M | grep -v "$(bspc query -M -m $INTERNAL)" | xargs -I {} bspc monitor {} --remove
 fi
 
-feh --bg-scale "$HOME/Pictures/wallpapers/medalha.png" --image-bg "#23262d"
+feh --bg-scale "$HOME/Pictures/wallpapers/lambda.png" --image-bg "#23262d"
 
 killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done

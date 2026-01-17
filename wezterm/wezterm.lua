@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 config.font = wezterm.font 'JetBrains Mono' 
-config.font_size = 12.0
+config.font_size = 10.0
 config.term = "xterm-256color"
 config.tab_bar_at_bottom = true     
 config.use_fancy_tab_bar = false  
