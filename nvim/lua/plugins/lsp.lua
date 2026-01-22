@@ -57,7 +57,7 @@ return {
     -- 2. DIAGNOSTICS CONFIG (Icons & Text)
     -- ==========================================================
     vim.diagnostic.config({
-      update_in_insert = false, -- Stops scanning while typing (Prevents crashes/lag)
+      update_in_insert = true, -- Change to false in case of crashes in scanning while typing
       virtual_text = { spacing = 4, prefix = "●" },
       severity_sort = true,
     })
