@@ -116,7 +116,7 @@ return {
         settings = {
           ltex = {
             language = "pt-BR",
-            checkFrequency = "typing",
+            checkFrequency = "save",
             sentenceCacheSize = 2000,
             completionEnabled = true,
           }
