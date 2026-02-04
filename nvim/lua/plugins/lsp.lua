@@ -6,14 +6,6 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
-    -- Plugin that shows errors inline (configured to be non-intrusive)
-    { 
-      "chikko80/error-lens.nvim", 
-      opts = {
-        error_stack_trace = false, -- PREVENTS the giant red block on the screen
-        delay = 500, -- Delay to avoid flickering while typing fast
-      } 
-    },
     -- Dependency needed for the keymaps defined below
     'ibhagwan/fzf-lua', 
   },
@@ -102,38 +94,33 @@ return {
       texlab = {},   -- Builds the PDF / Basic completion
       bashls = {},
       -- Lua configuration
-      lua_ls = { 
-        settings = { 
-          Lua = { 
-            diagnostics = { globals = { 'vim' } } 
-          } 
-        } 
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = { globals = { 'vim' } }
+          }
+        }
       },
       -- LTeX configuration (Using ltex_plus)
       ltex_plus = {
         filetypes = { "latex", "tex", "bib", "markdown" },
-        settings = { 
-          ltex = { 
+        settings = {
+          ltex = {
             language = "pt-BR",
             checkFrequency = "save",
             sentenceCacheSize = 2000,
-          } 
+          }
         }
       },
     }
 
     require('mason-tool-installer').setup { ensure_installed = vim.tbl_keys(servers) }
-    
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
-          -- Skip rust manually (assuming you use rustaceanvim)
-          if server_name == "rust_analyzer" then return end 
-          
           local server = servers[server_name] or {}
           -- Merges default capabilities with server-specific ones
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          
           require('lspconfig')[server_name].setup(server)
         end,
       },

@@ -68,11 +68,12 @@ map("n", "<BS>", "dd", { desc = "Delete current line" })
 -- =============================================================================
 
 -- File Explorer (Oil)
-map("n", "<leader>e", "<cmd>Oil<cr>", { desc = "File Explorer" })
 map("n", "-", "<cmd>Oil<CR>", {desc="Open Parent Directory in Oil"})
 
 -- Windows
-map("n", "<leader>w", "<c-w>", { desc = "Window Actions" })
+map("n", "<leader>w", "<C-w>", { desc = "Window Actions", remap = true })
+-- G commands
+map("n", "<leader>q", "g", { desc = "G commands", remap = true })
 
 -- =============================================================================
 -- Buffline   
@@ -109,3 +110,7 @@ map('n', '<leader>lv', '<cmd>VimtexView<cr>',    { desc = 'View PDF (Zathura)' }
 map('n', '<leader>le', '<cmd>VimtexErrors<cr>',  { desc = 'Show Errors' })
 map('n', '<leader>lc', '<cmd>VimtexClean<cr>',   { desc = 'Clean Auxiliary Files' })
 map('n', '<leader>ls', '<cmd>VimtexStop<cr>',    { desc = 'Stop Compilation' })
+
+
+-- Toggle Mini.Map (Enable/Disable)
+map('n', '<Leader>m', '<cmd>lua MiniMap.toggle()<CR>', { desc = 'Minimap' })

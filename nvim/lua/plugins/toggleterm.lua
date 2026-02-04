@@ -4,7 +4,7 @@ return {
   -- Defining keys here is robust because it handles lazy loading automatically
   keys = {
     { "<leader>d", "<cmd>lua _lazydocker_toggle()<CR>", desc = "LazyDocker" },
-    { "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", desc = "LazyGit" },
+    { "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", desc = "LazyGit" },
     -- This handles opening/closing from Normal mode
     { "<C-\\>", "<cmd>ToggleTerm<cr>", mode = "n", desc = "Terminal" },
   },
