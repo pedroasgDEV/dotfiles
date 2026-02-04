@@ -10,7 +10,6 @@ return {
     vim.g.vimtex_compiler_latexmk = {
       options = {
         '-shell-escape',
-        '-verbose',
         '-file-line-error',
         '-synctex=1', -- Required for SyncTeX (PDF <-> Code)
         '-interaction=nonstopmode',

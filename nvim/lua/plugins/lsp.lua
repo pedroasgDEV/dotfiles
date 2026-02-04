@@ -55,30 +55,37 @@ return {
     })
 
     -- ==========================================================
-    -- 3. LSP ATTACH (Keymaps)
+    -- 3. LSP ATTACH (Keymaps: Direct + Leader backups)
     -- ==========================================================
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        local map = function(keys, func, desc)
-          vim.keymap.set('n', '<leader>c' .. keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        local fzf = require('fzf-lua')
+        
+        -- Helper function for local buffer mappings
+        local map = function(mode, keys, func, desc)
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        -- --- DIRECT SHORTCUTS ---
+        -- Note: If <C-.> or <C-,> doesn't work in your terminal, try <M-.> or <M-,> (Alt)
+        map('n', '<C-.>', fzf.lsp_code_actions, 'Code Action (Direct)')
+        map('n', '<C-,>', vim.lsp.buf.rename, 'Rename (Direct)')
+
+        -- --- LEADER SHORTCUTS (Backups) ---
+        map('n', '<leader>ca', fzf.lsp_code_actions, 'Code Action')
+        map('n', '<leader>cr', vim.lsp.buf.rename, 'Rename')
+        
+        -- Navigation & Diagnostics
+        map('n', '<leader>cd', fzf.lsp_definitions, 'Go to Definition')
+        map('n', '<leader>cl', fzf.lsp_references, 'References')
+        map('n', '<leader>ce', fzf.lsp_document_diagnostics, 'Document Diagnostics')
+
+        -- Specific for Text Files (LaTeX/Markdown)
         local ft = vim.bo[event.buf].filetype
         if ft == 'tex' or ft == 'latex' or ft == 'bib' or ft == 'markdown' then
-          vim.keymap.set('n', '<leader>li', toggle_latex_langs, { buffer = event.buf, desc = 'LaTeX: Cycle Language' })
+          vim.keymap.set('n', '<leader>li', toggle_latex_langs, { buffer = event.buf, desc = 'Cycle Language' })
         end
-
-        -- Fzf-lua mappings
-        local fzf = require('fzf-lua')
-        map('d', fzf.lsp_definitions, 'Definition')
-        map('r', fzf.lsp_references, 'References')
-        map('i', fzf.lsp_implementations, 'Implementation')
-        map('a', vim.lsp.buf.code_action, 'Code Action')
-        map('e', fzf.lsp_document_diagnostics, 'Document Diagnostics')
-        
-        -- Rename
-        map('n', vim.lsp.buf.rename, 'Rename')
       end,
     })
 
@@ -86,6 +93,8 @@ return {
     -- 4. SERVER SETUP (Mason)
     -- ==========================================================
     local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- Esta linha abaixo é CRUCIAL para o Blink injetar as sugestões:
+    capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
     
     -- Server Configurations
     local servers = {
@@ -107,8 +116,9 @@ return {
         settings = {
           ltex = {
             language = "pt-BR",
-            checkFrequency = "save",
+            checkFrequency = "typing",
             sentenceCacheSize = 2000,
+            completionEnabled = true,
           }
         }
       },
