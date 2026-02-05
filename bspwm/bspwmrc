@@ -5,7 +5,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 # Monitor sconfiguration & Layout
-$HOME/.config/bspwm/scripts/monitor_setup.sh &
+$HOME/.config/bspwm/scripts/monitor_setup.sh
 
 # Windows configuration & Layout
 
@@ -39,6 +39,7 @@ bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a solanum state=floating sticky=on rectangle=300x200+0+0 center=on
 bspc rule -a Evince state=floating center=on
+bspc rule -a deno state=tiling
 
 
 # Disable screensaver

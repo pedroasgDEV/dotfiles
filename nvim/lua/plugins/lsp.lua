@@ -98,8 +98,6 @@ return {
     
     -- Server Configurations
     local servers = {
-      clangd = {},
-      pyright = {},
       texlab = {},   -- Builds the PDF / Basic completion
       bashls = {},
       -- Lua configuration

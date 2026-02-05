@@ -1,4 +1,4 @@
 #!/bin/sh
 
-exec bspwm
+sxhkd &
 exec dbus-launch --exit-with-session bspwm
