@@ -6,6 +6,16 @@ return {
     "rcarriga/nvim-notify",
   },
   opts = {
+    routes = {
+      {
+        filter = {
+          event = "lsp",
+          kind = "progress",
+          find = "Checking document",
+        },
+        opts = { skip = true }, -- Isso fará com que o Neovim ignore a mensagem
+      },
+    },
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,

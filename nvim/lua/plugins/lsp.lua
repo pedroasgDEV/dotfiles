@@ -5,9 +5,8 @@ return {
     { 'williamboman/mason.nvim', opts = {} },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = {} },
-    -- Dependency needed for the keymaps defined below
-    'ibhagwan/fzf-lua', 
+    'ibhagwan/fzf-lua',
+    'nvimtools/none-ls.nvim',
   },
   config = function()
     -- ==========================================================
@@ -110,9 +109,20 @@ return {
       },
       -- LTeX configuration (Using ltex_plus)
       ltex_plus = {
+        cmd = { "ltex-ls-plus", "--mem", "1024m" },
         filetypes = { "latex", "tex", "bib", "markdown" },
+        capabilities = { window = { workDoneProgress = false } },
+        on_attach = function(client, bufnr)
+          require("ltex_extra").setup({
+            load_langs = { "pt-BR", "en-US" }, -- Carrega dicionários para PT e EN
+            init_check = true,
+            path = vim.fn.stdpath("config") .. "/spell", -- Salva os arquivos em ~/.config/nvim/spell
+            log_level = "error",
+          })
+        end,
         settings = {
           ltex = {
+            trace = { server = "off" },
             language = "pt-BR",
             checkFrequency = "save",
             sentenceCacheSize = 2000,
@@ -126,6 +136,10 @@ return {
     require('mason-lspconfig').setup {
       handlers = {
         function(server_name)
+          if server_name == 'hls' or server_name == 'haskell-language-server' then
+            return
+          end
+
           local server = servers[server_name] or {}
           -- Merges default capabilities with server-specific ones
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})

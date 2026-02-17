@@ -66,8 +66,6 @@ return {
       "nvim-telescope/telescope.nvim", 
       "mfussenegger/nvim-dap-python" 
     },
-    branch = "regexp", -- Required for advanced path searching
-    event = "VeryLazy",
     keys = {
       -- Shortcut to open the selector: Space + v + s
       { "<leader>cp", "<cmd>VenvSelect<cr>", desc = "Select VirtualEnv (Pixi)" },

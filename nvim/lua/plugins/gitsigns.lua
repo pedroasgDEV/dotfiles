@@ -35,10 +35,6 @@ return {
       map('n', '[h', function()
         if vim.wo.diff then vim.cmd.normal({'[h', bang = true}) else gitsigns.nav_hunk('prev') end
       end, { desc = "Last mod" })
-
-      map('n', '<leader>gh', gitsigns.preview_hunk, { desc = "Preview" })
-      map('n', '<leader>gb', function() gitsigns.blame_line{full=true} end, { desc = "Blame" })
-      map('n', '<leader>gr', gitsigns.reset_hunk, { desc = "Reset" })
     end
   }
 }
