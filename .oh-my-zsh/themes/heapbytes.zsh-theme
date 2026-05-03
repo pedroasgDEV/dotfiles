@@ -1,23 +1,35 @@
-#Author : Pedro Augusto (https://github.com/pedroasgDEV)
+get_network_status() {
+  local output=""
+  local networks=($(ip -o -4 addr show | awk '{print $2"|"$4}' | cut -d/ -f1 | grep -vE 'lo|docker'))
 
-get_vpn_info() {
-  local vpn_interface=$(ip addr show | grep -E 'tun|ppp' | awk -F': ' '{print $2}' | head -n 1)
-  if [[ -n "$vpn_interface" ]]; then
-    echo "%F{magenta} VPN:$vpn_interface%f"
+  for net in $networks; do
+    local iface=$(echo $net | cut -d'|' -f1)
+    local ip=$(echo $net | cut -d'|' -f2)
+    local item=""
+
+    if [[ $iface == wlan* ]]; then # wireless
+      item="%F{green} %f%F{white}$iface: $ip%f"
+    elif [[ $iface == tun* || $iface == ppp* ]]; then #VPN
+      item="%F{magenta} %f%F{white}$iface: $ip%f"
+    else # (Ethernet/etc)
+      item="%F{blue}󰈀 %f%F{white}$iface: $ip%f"
+    fi
+
+    if [[ -z "$output" ]]; then
+      output="$item"
+    else
+      output="$output %F{yellow}|%f $item"
+    fi
+  done
+
+  if [[ -z "$output" ]]; then
+    echo "%F{red}󱘖 No IP%f"
   else
-    echo "%F{red} No VPN%f"
+    echo "$output"
   fi
 }
 
-get_ip_addresses() {
-  local ips=$(ip -o -4 addr show | awk '{print $2": "$4}' | cut -d/ -f1 | grep -vE 'lo|docker0' | paste -sd " | " -)
-  if [[ -z "$ips" ]]; then
-    echo "%F{red}No IP%f"
-  else
-    echo "%F{green} $ips%f"
-  fi
-}
-
+# Definição do Prompt
 PROMPT='┌─[%F{blue} %~%f]
-└─[%F{yellow}%n@%m%f] [$(get_ip_addresses)] [$(get_vpn_info)] $(git_prompt_info)
+└─[%F{yellow}%n@%m%f] [$(get_network_status)] $(git_prompt_info)
 λ '
